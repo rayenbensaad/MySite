@@ -1,0 +1,19 @@
+AppBundle\Entity\Client:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: email
+    properties:
+        username:
+            - NotBlank: ~
+            - Type: string
+        email:
+            - NotBlank: ~
+            - Type: string
+        type:
+            - NotBlank: ~
+            - Email: ~
+        plainPassword:
+            - NotBlank: { groups: [New, FullUpdate] }
+            - Type: string
+            - Length:
+                min: 4
+                max: 50

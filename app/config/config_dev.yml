@@ -37,5 +37,9 @@ monolog:
         #    type: chromephp
         #    level: info
 
-#swiftmailer:
+swiftmailer:
+    stream_options:
+        ssl:
+            allow_self_signed: true
+            verify_peer: false
 #    delivery_addresses: ['me@example.com']

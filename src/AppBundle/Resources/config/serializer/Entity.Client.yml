@@ -1,0 +1,13 @@
+AppBundle\Entity\Client:
+    exclusion_policy: none
+    properties:
+        id:
+            groups: ['client', 'auth-token']
+        username:
+            groups: ['client', 'auth-token']
+        email:
+            groups: ['client', 'auth-token']
+        type:
+            groups: ['client', 'auth-token']
+        password:
+            groups : ['client']

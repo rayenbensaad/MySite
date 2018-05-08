@@ -1,0 +1,23 @@
+
+AppBundle\Entity\Client:
+    attributes:
+        id:
+            groups: ['user', 'auth-token']
+        username:
+            groups: ['user', 'auth-token']
+        email:
+            groups: ['user', 'auth-token']
+        type:
+            groups: ['user', 'auth-token']
+
+
+AppBundle\Entity\AuthToken:
+    attributes:
+        id:
+            groups: ['auth-token']
+        value:
+            groups: ['auth-token']
+        createdAt:
+            groups: ['auth-token']
+        client:
+            groups: ['auth-token']

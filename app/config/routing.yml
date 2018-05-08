@@ -1,6 +1,40 @@
-app:
-    resource: '@AppBundle/Controller/'
-    type: annotation
+#app:
+#    resource: '@AppBundle/Controller/'
+#    type: annotation
+## app/config/routing.yml
+##fos_user:
+##    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+#
+## app/config/routing.yml
+#app.swagger_ui:
+#    path: /api/doc
+#    methods: GET
+#    defaults: { _controller: nelmio_api_doc.controller.swagger_ui }
+#
+## app/config/routing.yml
+#app.swagger:
+#    path: /api/doc.json
+#    methods: GET
+#    defaults: { _controller: nelmio_api_doc.controller.swagger }
+
 # app/config/routing.yml
-fos_user:
-    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+easy_admin_bundle:
+    resource: "@EasyAdminBundle/Controller/AdminController.php"
+    type:     annotation
+    prefix:   /admin
+
+
+#nelmio_api_swagger:
+#    resource: "@NelmioApiDocBundle/Resources/config/swagger_routing.yml"
+#    prefix: /api-docs
+
+nelmio:
+    resource: "routing/nelmio_api_doc.yml"
+
+#NelmioApiDocBundle:
+#    resource: "@NelmioApiDocBundle/Resources/config/routing/swaggerui.xml"
+#    prefix:   /api/doc
+
+register:
+    path:     /user/inscription
+    defaults: { _controller: AppBundle:Client:inscriptionUser }

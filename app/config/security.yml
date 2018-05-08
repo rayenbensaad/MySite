@@ -26,27 +26,59 @@
 security:
     encoders:
         FOS\UserBundle\Model\UserInterface: bcrypt
-
+        AppBundle\Entity\Client:
+            algorithm: bcrypt
+            cost: 12
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
         ROLE_SUPER_ADMIN: ROLE_ADMIN
 
     providers:
+        auth_token_user_provider:
+            id: auth_token_user_provider
+
         fos_userbundle:
             id: fos_user.user_provider.username
+
+        in_memory:
+                  memory: ~
 
     firewalls:
         main:
             pattern: ^/
             form_login:
-                provider: fos_userbundle
+#                provider: fos_userbundle
                 csrf_token_generator: security.csrf.token_manager
 
             logout:       true
             anonymous:    true
+
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        general_exceptions:
+             pattern: ^/api/user/inscription
+             security: false
+#        validation:
+#              pattern: ^/api/user/valid-code|^/api/admin/valid-compte|^/api/user/forget-password|^/api/admin/forget-password
+##              security: false
+        client:
+            pattern: ^/api/user/
+            stateless: true
+            simple_preauth:
+                authenticator: auth_token_authenticator
+            provider: auth_token_user_provider
+            anonymous: ~
+
+
+
+
+
 
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/doc,   roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/,      roles: IS_AUTHENTICATED_ANONYMOUSLY }

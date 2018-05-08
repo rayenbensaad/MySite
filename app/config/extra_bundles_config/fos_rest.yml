@@ -1,0 +1,18 @@
+fos_rest:
+    routing_loader:
+        include_format: false
+    view:
+        view_response_listener: true
+    format_listener:
+        enabled: true
+        rules:
+            - { path: '^/', priorities: ['json', 'text/html'], fallback_format: 'json', prefer_extension: false }
+    exception:
+        enabled: true
+        exception_controller: 'fos_rest.exception.controller:showAction'
+    body_listener:
+        enabled: true
+    param_fetcher_listener:
+        enabled: true
+    serializer:
+        serialize_null: true

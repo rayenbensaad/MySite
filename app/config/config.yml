@@ -2,6 +2,10 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: extra_bundles_config/nelmio_api_doc.yml }
+    - { resource: extra_bundles_config/fos_rest.yml }
+    - { resource: extra_bundles_config/jms_serializer.yml }
+
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -63,7 +67,7 @@ doctrine:
 # Swiftmailer Configuration
 swiftmailer:
     transport: '%mailer_transport%'
-    host: '%mailer_host%'
+    host:  '%mailer_host%'
     username: '%mailer_user%'
     password: '%mailer_password%'
     spool: { type: memory }
@@ -77,4 +81,48 @@ fos_user:
     from_email:
         address: "testapp@testapp.com"
         sender_name: "Test App"
+    registration:
+            form:
+                name: app_user_registration
 
+
+nelmio_cors:
+        defaults:
+            allow_credentials: false
+            allow_origin: []
+            allow_headers: []
+            allow_methods: []
+            expose_headers: []
+            max_age: 0
+            hosts: []
+            origin_regex: false
+        paths:
+            '^/api/':
+                allow_origin: ['*']
+                allow_headers: ['*']
+                allow_methods: ['POST', 'PUT', 'GET', 'DELETE']
+                max_age: 3600
+
+
+#nelmio_api_doc: ~
+
+easy_admin:
+    entities:
+        - AppBundle\Entity\User
+
+#fos_rest:
+#    routing_loader:
+#        include_format: false
+#    body_listener:
+#        enabled: true
+#    body_converter:
+#        enabled: true
+#    format_listener:
+#        enabled:              false
+#        service:              null
+#        rules:
+#    param_fetcher_listener:
+#        enabled: true
+#    exception:
+#        enabled: true
+#        exception_controller: 'fos_rest.exception.controller:showAction'
